@@ -7,4 +7,10 @@ Rails.application.routes.draw do
   get '/suppliers/:id', to: 'suppliers#show'
   get '/suppliers', to: 'suppliers#index'
 
+  post '/products', to: 'products#create'
+  delete '/products/:id', to: 'products#destroy'
+  put '/products/:id', to: 'products#update'
+  get '/products/:id', to: 'products#show'
+  get '/products', to: 'products#index'
+
 end
