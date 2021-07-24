@@ -13,4 +13,9 @@ Rails.application.routes.draw do
   get '/products/:id', to: 'products#show'
   get '/products', to: 'products#index'
 
+  post '/categories', to: 'categories#create'
+  delete '/categories/:id', to: 'categories#destroy'
+  put '/categories/:id', to: 'categories#update'
+  get '/categories/:id', to: 'categories#show'
+  get '/categories', to: 'categories#index'
 end
