@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_125936) do
+ActiveRecord::Schema.define(version: 2021_07_24_064657) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_07_23_125936) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "supplier_id"
+    t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
   create_table "suppliers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -40,4 +42,5 @@ ActiveRecord::Schema.define(version: 2021_07_23_125936) do
     t.index ["email"], name: "index_suppliers_on_email", unique: true
   end
 
+  add_foreign_key "products", "suppliers"
 end

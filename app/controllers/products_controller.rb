@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
         if @product.save
             render(json: { message: "Product was created successfully"}, status: :created)
         else
-            render(json: { message: "Product was not created successfully"}, status: :unprocessable_entity)
+            render(json: { message: "Product was not created"}, status: :unprocessable_entity)
         end
     end
 
@@ -48,6 +48,6 @@ class ProductsController < ApplicationController
 
     private
     def product_params
-        params.permit(:name, :description, :quantity, :price, :status)
+        params.permit(:name, :description, :quantity, :price, :status, :supplier_id)
     end
 end

@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
-  validates :name, presence: true
-  validates :quantity, presence: true
+    belongs_to :supplier
+    validates :name, presence: true
+    validates :quantity, presence: true
+    validates :supplier_id, presence: true
 end
