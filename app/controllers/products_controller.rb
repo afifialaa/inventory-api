@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
+    ##
+    # Returns all products
     def index
         @products = Product.all
         render(json: {products: @products}, status: :ok)
@@ -17,6 +19,8 @@ class ProductsController < ApplicationController
         end
     end
 
+    ##
+    # Creates a new product
     def create
         @product = Product.new(product_params)
         if @product.save
@@ -26,6 +30,9 @@ class ProductsController < ApplicationController
         end
     end
 
+
+    ##
+    # Deletes a product by id
     def destroy
         @product = Product.find_by_id(params[:id])
         if !@product
@@ -35,6 +42,8 @@ class ProductsController < ApplicationController
         end
     end
   
+    ##
+    # Updates a product
     def update
         @product = Product.find_by_id(params[:id])
         if !@product
@@ -44,6 +53,13 @@ class ProductsController < ApplicationController
         else
             render(json: {message: "Product was not deleted"}, status: :ok)
         end
+    end
+
+    ##
+    # Counts all products
+    def count_all
+        @count = Product.all.count
+        render(json: {count: @count})
     end
 
     private

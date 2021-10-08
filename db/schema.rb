@@ -12,14 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_08_04_072929) do
 
-  create_table "categories", charset: "latin1", force: :cascade do |t|
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "products", charset: "latin1", force: :cascade do |t|
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
     t.integer "quantity", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_072929) do
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
-  create_table "suppliers", charset: "latin1", force: :cascade do |t|
+  create_table "suppliers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
     t.string "phone"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_072929) do
     t.index ["email"], name: "index_suppliers_on_email", unique: true
   end
 
-  create_table "users", charset: "latin1", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false

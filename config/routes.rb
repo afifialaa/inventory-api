@@ -6,12 +6,14 @@ Rails.application.routes.draw do
     put '/suppliers/:id', to: 'suppliers#update'
     get '/suppliers/:id', to: 'suppliers#show'
     get '/suppliers', to: 'suppliers#index'
+    get '/suppliers/count/products', to: 'suppliers#count_products'
 
-    post '/products', to: 'products#create'
+    post '/products/new', to: 'products#create'
     delete '/products/:id', to: 'products#destroy'
     put '/products/:id', to: 'products#update'
     get '/products/:id', to: 'products#show'
     get '/products', to: 'products#index'
+    get '/products/count/all', to: 'products#count_all'
 
     post '/categories', to: 'categories#create'
     delete '/categories/:id', to: 'categories#destroy'
