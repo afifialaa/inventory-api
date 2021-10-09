@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
         @product = Product.find_by_id(params[:id])
         if !@product
             render(json: {message: "Product was not found"}, status: :not_found)
-        elsif
+        else
             render(json: {product: @product}, status: :ok)
         end
     end

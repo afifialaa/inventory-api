@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_072929) do
+ActiveRecord::Schema.define(version: 2021_10_09_145502) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -48,6 +48,18 @@ ActiveRecord::Schema.define(version: 2021_08_04_072929) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "warehouses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.string "phone_number"
+    t.string "email"
+    t.integer "manager_id"
+    t.integer "total_capacity"
+    t.integer "occupied_capacity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "products", "suppliers"
