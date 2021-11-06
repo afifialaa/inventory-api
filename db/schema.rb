@@ -10,13 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_09_145502) do
+ActiveRecord::Schema.define(version: 2021_11_06_175502) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employees", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "poistion", null: false
+    t.string "phone"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "warehouse_id"
+    t.index ["warehouse_id"], name: "index_employees_on_warehouse_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -62,5 +74,6 @@ ActiveRecord::Schema.define(version: 2021_10_09_145502) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "employees", "warehouses"
   add_foreign_key "products", "suppliers"
 end

@@ -37,6 +37,12 @@ Rails.application.routes.draw do
             get '/warehouse', to: 'warehouses#index'
             delete '/warehouse/:id', to: 'warehouses#destroy'
             put '/warehouse/:id', to: 'warehouses#update'
+
+            # Employees routes
+            post '/employee', to: 'employees#create'
+            get '/employee', to: 'employees#show'
+            delete '/employee/:id', to: 'employees#destory'
+            put '/employee/:id', to: 'employees#update'
         end
     end
     

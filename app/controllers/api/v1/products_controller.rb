@@ -14,7 +14,7 @@ module Api::V1
             if !@product
                 render(json: {message: "Product was not found"}, status: 404)
             else
-                render(json: {product: @product}, status: 200)
+                render(json: @product, status: 200)
             end
         end
 
@@ -22,8 +22,8 @@ module Api::V1
         # Creates a new product
         def create
             @product = Product.new(product_params)
-            if @product.supplier == nil 
-                render(json: { message: "Supplier was not found"}, status: 404)
+            if @product == nil 
+                render(json: { message: "Product was not found"}, status: 404)
             elsif @product.save
                 render(json: { message: "Product was created successfully"}, status: 201)
             else
