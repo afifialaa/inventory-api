@@ -26,40 +26,52 @@ And now you can visit the site with the URL http://localhost:3000
 
 ## Usage
 
-### User routes
+### User endpoints
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /user/signup  |create a new user  |
+| POST           | /user/login  |authenticate  a user|
 
-### Supplier routes
+### Supplier endpoints
 
 | Method        | URL                  | description            |
 | ------------- | -------------        |-------------           |
-| POST          | /suppliers  |create new supplier  |
-| GET           | /suppliers/:id  |return specific supplier|
-| GET           | /suppliers  |return all suppliers|
-| DELETE           | /suppliers/:id  |delete supplier|
-| PUT        | /suppliers/:id  |update supplier|
+| POST          | /supplier  |create a new supplier  |
+| GET           | /supplier/:id  |return a specific supplier|
+| GET           | /supplier  |return all suppliers|
+| DELETE           | /supplier/:id  |delete a supplier|
+| PUT        | /supplier/:id  |update a supplier|
 
-### Product routes
-
-| Method        | URL                  | description            |
-| ------------- | -------------        |-------------           |
-| POST          | /Products  |create new product  |
-| GET           | /Products/:id  |return specific product|
-| GET           | /Products  |return all products|
-| DELETE           | /Products/:id  |delete product|
-| PUT        | /Products/:id  |update product|
-
-### Category routes
+### Product endpoints
 
 | Method        | URL                  | description            |
 | ------------- | -------------        |-------------           |
-| POST          | /categories  |create category  |
-| GET           | /categories/:id  |return specific category|
-| GET           | /categories  |return all categories|
-| DELETE           | /categories/:id  |delete category|
-| PUT        | /categories/:id  |update category|
+| POST          | /product  |create a new product  |
+| GET           | /product/:id  |return a specific product|
+| GET           | /product  |return all products|
+| DELETE           | /product/:id  |delete a product|
+| PUT        | /product/:id  |update a product|
+
+### Category endpoints
+
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /category  |create a category  |
+| GET           | /category/:id  |return a specific category|
+| GET           | /category  |return all categories|
+| DELETE           | /category/:id  |delete a category|
+| PUT        | /category/:id  |update a category|
+
+### Warehouse endpoints
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /warehouse  |create a warehouse  |
+| GET           | /warehouse/:id  |return a specific warehouse|
+| GET           | /warehouse  |return all warehouses|
+| DELETE           | /warehouse/:id  |delete a warehouse|
+| PUT           | /warehouse/:id  |update a specific warehouse|
 
 
 
 ## Pending
-* User authentication
 * Dockerizing the api

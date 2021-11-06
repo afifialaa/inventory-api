@@ -9,7 +9,7 @@ module Api::V1
             if @user.save
                 render(json: { message: "User created successfully" }, status: 201)
             else
-                render(json: { message: "Failed to create user" }, status: :unprocessable_entity)
+                render(json: { message: @user.errors.messages[:email]}, status: 422)
             end
         end
 
@@ -30,7 +30,7 @@ module Api::V1
             if !@user
                 render(json: { message: "User was not found " }, status: 404)
             elsif @user && @user.authenticate(params[:password]) 
-                render(json: {user: @user}, status: 200)
+                render(json: @user, status: 200)
             else
                 render(json: { message: "Wrong password" }, status: 401)
             end
@@ -38,7 +38,10 @@ module Api::V1
 
         private
         def user_params
-            params.require(:user).permit( :email, :password)
+            # params.require(:user).permit( :email, :password)
+            params.permit( :email, :password)
         end
     end
 end
+#curl -X POST http://localhost:8080/api/v1/user/signup -H 'Content-Type: application/json' -d '{"user": {"email":"test@email.com", "password":"test123"}}'
+#curl -X POST http://localhost:8080/api/v1/user/login -H 'Content-Type: application/json' -d '{"email":"samsung@gmail.com", "password":"samsung123"}'
