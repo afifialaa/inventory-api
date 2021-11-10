@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
+gem 'rack-attack'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 # Use mysql as the database for Active Record
@@ -24,6 +26,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
+gem "minitest-rails", "~> 6.1.0"
 
 gem 'rack-cors'
 
