@@ -1,5 +1,7 @@
 class EmployeesController < ApplicationController
 
+    skip_before_action :verify_authenticity_token
+
 	# Returns all employees
 	def index
 		@employees = Employee.all
