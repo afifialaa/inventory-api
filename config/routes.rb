@@ -41,14 +41,19 @@ Rails.application.routes.draw do
             # Employees routes
             post '/employee', to: 'employees#create'
             get '/employee', to: 'employees#show'
-            delete '/employee/:id', to: 'employees#destory'
+            delete '/employee/:id', to: 'employees#destroy'
             put '/employee/:id', to: 'employees#update'
 
             # Customer routes
-
             post '/customer', to: 'customers#create'
             get '/customer/:id', to: 'customers#show'
-            delete '/customer/:id', to: 'customers#destory'
+            delete '/customer/:id', to: 'customers#destroy'
+
+            # Order routes
+            post '/order', to: 'orders#create'
+            get '/order/:id', to: 'orders#show'
+            delete '/order/:id', to: 'orders#destroy'
+            get '/order/customer/:customer_id', to: 'orders#show_customer_orders'
         end
     end
     

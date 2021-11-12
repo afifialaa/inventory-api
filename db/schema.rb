@@ -10,20 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_10_180707) do
+ActiveRecord::Schema.define(version: 2021_11_12_061519) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "cusomters", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_cusomters_on_email", unique: true
   end
 
   create_table "customers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -43,6 +36,13 @@ ActiveRecord::Schema.define(version: 2021_11_10_180707) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "warehouse_id"
     t.index ["warehouse_id"], name: "index_employees_on_warehouse_id"
+  end
+
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -89,5 +89,6 @@ ActiveRecord::Schema.define(version: 2021_11_10_180707) do
   end
 
   add_foreign_key "employees", "warehouses"
+  add_foreign_key "orders", "customers"
   add_foreign_key "products", "suppliers"
 end
