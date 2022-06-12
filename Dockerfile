@@ -1,20 +1,10 @@
-FROM ruby:3.0
-RUN apt-get update && \
-apt-get install -y nodejs
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-RUN gem install bundler -v 2.2.3
+FROM ruby:3.1.2
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN gem install bundler -v 2.3.9
 RUN bundle install
-RUN bundle exec rake db:create
-RUN bundle exec rake db:migrate
-
-
-# Add a script to be executed every time the container starts.
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
-
-# Configure the main process to run when running the image
+RUN rails webpacker:install
+EXPOSE 3000 
 CMD ["rails", "server", "-b", "0.0.0.0"]

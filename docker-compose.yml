@@ -1,29 +1,32 @@
 version: "3.9"
 services:
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    links:
-      - db
-    environment:
-      MYSQL_ROOT_PASSWORD: admin12345
-      MYSQL_DATABASE: inventory
-      MYSQL_USER: root
-      DB_HOST: db
 
   db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: admin12345
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
       MYSQL_DATABASE: inventory
     ports:
       - "3307:3306"
+    tty: true
+
+  web:
+    build: .
+    command: bash -c "bash ./init.sh && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    tty: true
     volumes:
-      - /var/lib/mysql
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db:mysql
+    links:
+      - db
+    environment:
+      - DB_USER=root
+      - DB_NAME=inventory
+      - DB_HOST=db
+
+volumes:
+  db:
