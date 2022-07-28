@@ -4,6 +4,8 @@ module Api::V1
         # skip CRSF token authentication
         skip_before_action :verify_authenticity_token
 
+        before_action :set_user, only: [:show, :destroy, :update]
+
         ##
         # Returns all suppliers
         def index
@@ -14,12 +16,7 @@ module Api::V1
         ##
         # Finds a supplier by id
         def show
-            @supplier = Supplier.find_by_id(params[:id])
-            if !@supplier 
-                render(json: {message: "not a variable"}, status: :not_found)
-            else
-                render(json: {supplier: @supplier}, status: :ok)
-            end
+        	render(json: {supplier: @supplier}, status: :ok)
         end
 
         ##
@@ -36,19 +33,14 @@ module Api::V1
         ##
         # Deletes a supplier by id
         def destroy
-            @supplier = Supplier.find_by_id(params[:id])
-            if !@supplier
-                render(json: { message: "Supplier was not found"}, status: :not_found)
-            else
-                @supplier.destroy
-                render(json: { message: "Supplier was deleted successfully"}, status: :ok)
+           	if @supplier.destroy
+                render(json: { message: "Supplier was deleted"}, status: :ok)
             end
         end
 
         ##
         # Updates a supplier
         def update
-            @supplier = Supplier.find(params[:id])
             if @supplier.update(supplier_params)
                 render(json: { message: "Supplier was updated successfully"}, status: :ok)
             else

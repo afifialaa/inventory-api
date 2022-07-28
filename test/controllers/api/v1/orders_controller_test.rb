@@ -1,9 +1,7 @@
 require "test_helper"
 
-class  CustomersController < ActionDispatch::IntegrationTest
+class OrdersController < ActionDispatch::IntegrationTest
   test "the truth" do
     assert true
   end
 end
-
-

@@ -105,9 +105,9 @@ GEM
     msgpack (1.4.2)
     mysql2 (0.5.3)
     nio4r (2.5.8)
-    nokogiri (1.13.6-x86_64-darwin)
+    nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.6-x86_64-linux)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     public_suffix (4.0.6)
     puma (5.5.0)
@@ -155,6 +155,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.1.1)
+    rexml (3.2.4)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -226,6 +227,7 @@ DEPENDENCIES
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.3, >= 6.1.3.1)
+  rexml
   sass-rails (>= 6)
   selenium-webdriver
   spring
@@ -236,7 +238,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.1.2p208
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.3.15

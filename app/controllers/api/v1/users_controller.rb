@@ -3,6 +3,9 @@ module Api::V1
         # skip CRSF token authentication
         skip_before_action :verify_authenticity_token
 
+        before_action :set_user, only: [:show, :destroy]
+        
+
         def create
             @user = User.new(user_params)
 
@@ -14,11 +17,7 @@ module Api::V1
         end
 
         def destroy
-            @user = User.find_by(email: params[:email])
-
-            if !@user 
-                render(json: { message: "User was not found " }, status: 404)
-            elsif @user.destroy
+            if @user.destroy
                 render(json: { message: "User was deleted" }, status: 200)
             else
                 render(json: { message: "User was not deleted" }, status: :unprocessable_entity)
@@ -26,10 +25,7 @@ module Api::V1
         end
 
         def show
-            @user = User.find_by(email: params[:email])
-            if !@user
-                render(json: { message: "User was not found " }, status: 404)
-            elsif @user && @user.authenticate(params[:password]) 
+            if @user && @user.authenticate(params[:password]) 
                 render(json: @user, status: 200)
             else
                 render(json: { message: "Wrong password" }, status: 401)

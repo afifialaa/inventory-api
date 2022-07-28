@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
 
     skip_before_action :verify_authenticity_token
+    before_action :get_employee, only: [:show, :destroy]
 
 	# Returns all employees
 	def index
@@ -10,12 +11,7 @@ class EmployeesController < ApplicationController
 
 	# Returns a specific employee
 	def show
-		@employee = Employee.find_by_id(params[:id])
-		if !@employee
-			render(json: {message: "employee was not found"}, status: 404)
-		else
-			render(json: @employee, status: 200)
-		end
+		render(json: @employee, status: 200)
 	end
 
 	# Creates a new employees
@@ -32,10 +28,7 @@ class EmployeesController < ApplicationController
 
 	# Deletes an employee by id
 	def destroy
-		@employee = Employee.find_by_id(params[:id])
-		if !@employee
-			render(json: {message: "Employee was not found"}, status: 404)
-		elsif @employee.destroy
+		if @employee.destroy
 			render(json: {message: "Employee was deleted successfully"}, status: 200)
 		end
 	end

@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe OrderDetail do
+class OrderDetailTest < ActiveSupport::TestCase
   # it "does a thing" do
   #   value(1+1).must_equal 2
   # end
