@@ -3,7 +3,7 @@ module Api::V1
         # skip CRSF token authentication
         skip_before_action :verify_authenticity_token
 
-        before_action :set_user, only: [:show, :destroy]
+        before_action :get_user, only: [:show, :destroy]
         
 
         def create
