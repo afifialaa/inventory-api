@@ -3,8 +3,8 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "vim.vimrc.enable": true,
-    "workbench.colorCustomizations" : {
-
-    },
-
+    "editor.lineDecorationsWidth": 10,
+    "editor.glyphMargin": false,
+    "editor.folding": false,
+    "workbench.colorCustomizations": {},
 }

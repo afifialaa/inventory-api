@@ -4,7 +4,7 @@ class CreateEmployees < ActiveRecord::Migration[6.1]
       t.string :email, null: false
       t.string :first_name
       t.string :last_name
-      t.integer :poistion, null: false
+      t.integer :position, null: false
       t.string :phone
 
       t.timestamps

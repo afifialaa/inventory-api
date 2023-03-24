@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
 	private
 
     def get_employee
-        @employee = Employee.find(params[:id])
-        if @employee == nil
-            render(json: {"message":"emplyee not found"}, status: :not_found)
+        @employee = Employee.find_by(id: params[:id])
+        if @employee == nil 
+            render(json: {error: "emplyee not found"}, status: :not_found)
+            return
         end
     end
 

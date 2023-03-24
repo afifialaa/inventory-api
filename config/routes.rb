@@ -41,6 +41,7 @@ Rails.application.routes.draw do
             # Employees routes
             post '/employee', to: 'employees#create'
             get '/employee', to: 'employees#show'
+            get '/employee/all', to: 'employees#index'
             delete '/employee/:id', to: 'employees#destroy'
             put '/employee/:id', to: 'employees#update'
 

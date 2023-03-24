@@ -5,6 +5,7 @@ class Warehouse < ApplicationRecord
     before_destroy :empty_warehouse?
 
     validates :name, presence: true
+    validates :email, :uniqueness => {:message => "Email is already taken by a warehouse"}
 
     private
     # Checks if warehouse is empty

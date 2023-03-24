@@ -30,7 +30,7 @@ module Api::V1
             if @warehouse.save
                 render(json: {message: "Warehouse was created successfully"}, status: :created)
             else
-                render(json: {message: "Failed to create warehouse"}, status: :unprocessable_entity)
+                render(json: {message: "Failed to create warehouse", errors: @warehouse.errors}, status: :unprocessable_entity)
             end
         end
 

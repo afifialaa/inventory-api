@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_11_12_080248) do
     t.string "email", null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "poistion", null: false
+    t.integer "position", null: false
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
