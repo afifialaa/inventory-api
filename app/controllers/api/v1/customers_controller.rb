@@ -21,12 +21,10 @@ class Api::V1::CustomersController < ApplicationController
 	# Creates a new customer
 	def create
 		@customer = Customer.new(customer_params)
-		if @customer == nil 
-			render(json: { message: "Customer was not found"}, status: 404)
-		elsif @customer.save
+		if @customer.save
 			render(json: { message: "Customer was created successfully"}, status: 201)
 		else
-			render(json: { message: "Customer was not created"}, status: 422)
+			render(json: { error: @customer.errors}, status: 422)
 		end
 	end
 

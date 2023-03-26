@@ -45,7 +45,7 @@ module Api::V1
         def update
             @product = Product.find_by_id(params[:id])
             if !@product
-                render(json: {message: "Product was not found"}, status: 404)
+                render(json: {error: "Product was not found"}, status: 404)
             elsif @product.update(product_params)
                 render(json: {product: @product}, status: 200)
             else
