@@ -4,7 +4,7 @@ module Api::V1
         # skip CRSF token authentication
         skip_before_action :verify_authenticity_token
 
-        before_action :set_user, only: [:show, :destroy, :update]
+        before_action :get_supplier, only: [:show, :destroy, :update]
 
         ##
         # Returns all suppliers
@@ -26,14 +26,15 @@ module Api::V1
             if @supplier.save
                 render(json: { message: "Supplier was created successfully"}, status: :created)
             else
-                render(json: { message: "Supplier was not created"}, status: :unprocessable_entity)
+                render(json: { message: "Supplier was not created", errors: @supplier.errors}, status: :unprocessable_entity)
             end
         end
+
 
         ##
         # Deletes a supplier by id
         def destroy
-           	if @supplier.destroy
+            if @supplier.destroy
                 render(json: { message: "Supplier was deleted"}, status: :ok)
             end
         end
@@ -41,10 +42,13 @@ module Api::V1
         ##
         # Updates a supplier
         def update
-            if @supplier.update(supplier_params)
-                render(json: { message: "Supplier was updated successfully"}, status: :ok)
+            @supplier = Supplier.find_by_id(params[:id])
+            if @supplier == nil
+                render(json: { error: "Supplier not found"}, status: :not_found)
+            elsif @supplier.update(supplier_params)
+                render(json: { supplier: @supplier}, status: :ok)
             else
-                render(json: { message: "Failed to update supplier"}, status: :not_modified)
+                render(json: { error: @supplier.errors}, status: 500)
             end
         end
 

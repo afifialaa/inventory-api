@@ -21,7 +21,7 @@ Rails.application.routes.draw do
             delete '/supplier/:id', to: 'suppliers#destroy'
             put '/supplier/:id', to: 'suppliers#update'
             get '/supplier/:id', to: 'suppliers#show'
-            get '/supplier', to: 'suppliers#index'
+            get '/suppliers', to: 'suppliers#index'
             get '/supplier/count/products', to: 'suppliers#count_products'
 
             # Categories routes

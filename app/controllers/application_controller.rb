@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
 
-	private
+    private
 
     def get_employee
-        @employee = Employee.find_by(id: params[:id])
-        if @employee == nil 
-            render(json: {error: "emplyee not found"}, status: :not_found)
+      @employee = Employee.find_by(id: params[:id])
+      if @employee == nil 
+        render(json: {error: "emplyee not found"}, status: :not_found)
             return
         end
     end
@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
 	end
 
     def get_supplier
-		@supplier = Supplier.find(params:id)
+		@supplier = Supplier.find_by(id: params[:id])
 		if @supplier == nil
-			render(json: {"message": "Supplier not found"}, status: :not_found)
+			render(json: {error: "Supplier not found"}, status: :not_found)
 		end
     end
 
