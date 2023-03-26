@@ -12,7 +12,7 @@ module Api::V1
         def show
             @product = Product.find_by_id(params[:id])
             if !@product
-                render(json: {message: "Product was not found"}, status: 404)
+                render(json: {error: "Product was not found"}, status: 404)
             else
                 render(json: @product, status: 200)
             end
@@ -22,12 +22,10 @@ module Api::V1
         # Creates a new product
         def create
             @product = Product.new(product_params)
-            if @product == nil 
-                render(json: { message: "Product was not found"}, status: 404)
-            elsif @product.save
+            if @product.save
                 render(json: { message: "Product was created successfully"}, status: 201)
             else
-                render(json: { message: "Product was not created"}, status: 422)
+                render(json: { error: @product.errors}, status: 422)
             end
         end
 
@@ -36,7 +34,7 @@ module Api::V1
         def destroy
             @product = Product.find_by_id(params[:id])
             if !@product
-                render(json: {message: "Product was not found"}, status: 404)
+                render(json: {error: "Product was not found"}, status: 404)
             elsif @product.destroy
                 render(json: {message: "Product was deleted successfully"}, status: 200)
             end
@@ -49,9 +47,9 @@ module Api::V1
             if !@product
                 render(json: {message: "Product was not found"}, status: 404)
             elsif @product.update(product_params)
-                render(json: {message: "Product was updated successfully"}, status: 200)
+                render(json: {product: @product}, status: 200)
             else
-                render(json: {message: "Product was not deleted"}, status: :ok)
+                render(json: {error: @product.errors}, status: 200)
             end
         end
 

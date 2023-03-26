@@ -3,7 +3,7 @@ class Product < ApplicationRecord
 
     has_many :order_details
 
-    validates :name, presence: true
+    validates :name, presence: true, :uniqueness => {:message => "Product with same name already exists"}
     validates :quantity, presence: true, numericality: { only_integer: true}
     validates :price, presence: true, numericality: true
     validates :supplier_id, presence: true
