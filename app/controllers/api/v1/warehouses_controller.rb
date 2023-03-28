@@ -38,7 +38,9 @@ module Api::V1
         # Deletes a warehouse
         def destroy
             @warehouse = Warehouse.find_by_id(params[:id])
-            if @warehouse.destroy
+            if @warehouse == nil
+                render(json: {error: 'Warehouse not found'}, status: :not_found)
+            elsif @warehouse.destroy
                 render(json: {message: "Warehouse was deleted"}, message: :ok)
             else
                 render(json: {message: @warehouse.errors.messages}, status: :unprocessable_entity)
@@ -52,7 +54,7 @@ module Api::V1
             if !@warehouse
                 render(json: {message: "Warehouse was not found"}, status: :not_found)
             elsif @warehouse.update(warehouse_params)
-                render(json: {message: "Warehouse was updated successfully"}, status: :ok)
+                render(json: {warehouse: @warehouse}, status: :ok)
             end
         end
 
