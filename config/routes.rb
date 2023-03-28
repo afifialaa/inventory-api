@@ -49,6 +49,8 @@ Rails.application.routes.draw do
             post '/customer', to: 'customers#create'
             get '/customer/:id', to: 'customers#show'
             delete '/customer/:id', to: 'customers#destroy'
+            put '/customer/:id', to: 'customers#update'
+            get '/customer', to: 'customers#index'
 
             # Order routes
             post '/order', to: 'orders#create'

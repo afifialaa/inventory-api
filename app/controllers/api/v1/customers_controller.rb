@@ -2,6 +2,8 @@ class Api::V1::CustomersController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    before_action :get_customer, only: [:show, :destroy, :update]
+
     # Returns all customers
     def index
         @customers = Customer.all
@@ -18,6 +20,12 @@ class Api::V1::CustomersController < ApplicationController
 		end
 	end
 
+    def update
+        if @customer.update(customer_params)
+            render(json: @customer, status: 201)
+        end
+    end
+
 	# Creates a new customer
 	def create
 		@customer = Customer.new(customer_params)
@@ -30,12 +38,11 @@ class Api::V1::CustomersController < ApplicationController
 
 	# Deletes a customer by id
 	def destroy
-		@customer = Customer.find_by_id(params[:id])
-		if !@customer
-			render(json: {message: "Customer was not found"}, status: 404)
-		elsif @customer.destroy
-			render(json: {message: "Customer was deleted successfully"}, status: 200)
-		end
+        if @customer.destroy
+            render(json: {message: "Customer was deleted successfully"}, status: 200)
+        else
+            render(json: {error: @customer.errors}, status: 500)
+        end
 	end
 
 	private

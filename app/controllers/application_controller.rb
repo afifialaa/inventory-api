@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
 		end
     end
 
+    def get_customer
+        @customer = Customer.find_by_id(params[:id])
+        if @customer == nil
+            render(json: {error: "Customer not found"}, status: :not_found)
+        end
+    end
+
 end
