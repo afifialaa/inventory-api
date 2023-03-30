@@ -2,6 +2,8 @@ class Api::V1::OrdersController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    before_action :get_order, only: [:show, :destroy, :add_item, :show_order_details]
+
     # Returns all orders
     def index
         @orders = Order.all
@@ -21,12 +23,10 @@ class Api::V1::OrdersController < ApplicationController
 	# Creates a new order
 	def create
 		@order = Order.new(order_params)
-		if @order == nil 
-			render(json: { message: "Order was not found"}, status: 404)
-		elsif @order.save
-			render(json: {id: @order.id}, status: 201)
+		if @order.save
+			render(json: {message: "Order was created successfully"}, status: 201)
 		else
-			render(json: { message: "Order was not created"}, status: 422)
+          render(json: { error: @order.errors}, status: 422)
 		end
 	end
 
@@ -53,53 +53,41 @@ class Api::V1::OrdersController < ApplicationController
 
 	# Add an item to the order
 	def add_item
-		# Check if order exists
-		@order = Order.find_by_id(params[:order_id])
-
-		if !@order
-			render(json: {message: "Order was not found"}, status: 404)
-			return
-		end
-
-		# ************** Should be in model???????
-		# Check if item was already added to order
 		if self.item_already_added?
-			item = OrderDetail.find_by(order_id: params[:order_id], product_id: params[:product_id])
+			item = OrderDetail.find_by(order_id: params[:id], product_id: params[:product_id])
 			total = params[:quantity].to_i + item.quantity.to_i
 			item.update(quantity: total)
-			render(json: {message: "Item quantity was updated"}, status: 404)
-			return
-		end
+			return render(json: {message: "Item quantity was updated"}, status: 404)
+        end
 
 		@order_details = OrderDetail.new
-		@order_details.order_id = params[:order_id]
+		@order_details.order_id = params[:id]
 		@order_details.product_id = params[:product_id]
 		@order_details.quantity = params[:quantity]
 
 		if @order_details.save
-			render(json: {message: "Item was added to order"}, status: 404)
+			render(json: {order: @order}, status: 200)
 		else
-			render(json: {message: "Order detail was not added"}, status: 422)
+			render(json: {error: @order_details.errors}, status: 422)
 		end
 
 	end
 
 	# Return items in order
 	def show_order_details
-		@order_details = OrderDetail.where(order_id: params[:order_id])
-		render(json: @order_details, status: 200) 
+		render(json: @order.order_details, status: 200) 
 	end
 
 	# Return products in order
 	def show_order_products
-		@order = Order.find_by(id: params[:order_id])
+		@order = Order.find_by(id: params[:id])
 		render(json: @order.products, status: 200) 
 	end
 
 	private
 	def item_already_added?
-		item = OrderDetail.find_by(order_id: self.params[:order_id], product_id: self.params[:product_id])
-		if !item or item == nil
+		@item = OrderDetail.find_by(order_id: params[:id], product_id: params[:product_id])
+		if !@item or @item == nil
 			return false
 		else
 			return true

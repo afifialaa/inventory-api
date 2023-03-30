@@ -54,14 +54,15 @@ Rails.application.routes.draw do
 
             # Order routes
             post '/order', to: 'orders#create'
+            post '/order/:id', to: 'orders#add_item'
             get '/order/:id', to: 'orders#show'
+            get '/order', to: 'orders#index'
             delete '/order/:id', to: 'orders#destroy'
             get '/order/customer/:customer_id', to: 'orders#show_customer_orders'
 
             # Order details routes
-            post '/order/:order_id/details', to: 'orders#add_item'
-            get '/order/:order_id/details', to: 'orders#show_order_details'
-            get '/order/:order_id/details/products', to: 'orders#show_order_products'
+            get '/order/:id/details', to: 'orders#show_order_details'
+            get '/order/:id/details/products', to: 'orders#show_order_products'
         end
     end
     

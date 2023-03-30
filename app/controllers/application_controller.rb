@@ -31,4 +31,11 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def get_order
+        @order = Order.find_by_id(params[:id])
+        if @order == nil
+          render(json: {error: "Order not found"}, status: 404)
+        end
+    end
+
 end
