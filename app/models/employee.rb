@@ -8,6 +8,12 @@ class Employee < ApplicationRecord
 	validates :position, presence: true
     validates :warehouse_id, presence: true
 
+    def self.count_employees
+        Rails.cache.fetch(['employee', __method__], expires_in: 2.minutes) do
+            Employee.count
+        end
+    end
+
     private
     def check_if_manager_exists
         warehouse_id = Employee.where(position: 'manager')

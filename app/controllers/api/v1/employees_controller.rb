@@ -46,10 +46,10 @@ module Api::V1
         end
 
         # Return count of all employees
-        # def count_all
-        # 	@count = Employee.all.count
-        # 	render(json: {count: @count})
-        # end
+        def count_all
+            count = Employee.count_employees
+            render(json: {message: count }, status: :ok )
+        end
 
         private
         def employee_params
