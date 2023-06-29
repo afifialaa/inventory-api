@@ -17,9 +17,9 @@ bundle install
 rails db:create
 rails db:migrate
 ```
-3. Start local server
+3. Start local server in development environment
 ```bash
-rails s
+rails s -e development
 ```
 And now you can visit the site with the URL http://localhost:3000
 
@@ -71,6 +71,30 @@ And now you can visit the site with the URL http://localhost:3000
 | DELETE           | /warehouse/:id  |delete a warehouse|
 | PUT           | /warehouse/:id  |update a specific warehouse|
 
+### Employee endpoints
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /employee  |create an employee  |
+| GET          | /employee/:id  |return an employee by id  |
+| GET          | /employee  |return all employees|
+| DELETE          | /employee/:id  |delete an employee |
+| PUT          | /employee/:id  |update an employee |
+
+### Customer endpoints
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /customer  |create a customer  |
+| GET          | /customer/:id  |return a customer by id  |
+| DELETE          | /customer/:id  |delete a customer |
+| PUT          | /customer/:id  |update a customer |
+
+### Order endpoints
+| Method        | URL                  | description            |
+| ------------- | -------------        |-------------           |
+| POST          | /order  |create an order  |
+| POST          | /order/:id  |add item to an order  |
+| GET          | /order/:id  |return an order |
+| DELETE          | /order/:id |delete order |
 
 
 ## Pending
