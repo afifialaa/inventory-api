@@ -3,12 +3,17 @@
 class Warehouse < ApplicationRecord
 
     # Ensures warehouse is empty before deletion
-    belongs_to :employee
     before_destroy :empty_warehouse?
+
+    has_and_belongs_to_many :products
 
     validates :name, presence: true
     validates :email, :uniqueness => {:message => "Email is already taken by a warehouse"}
-    validates :manager_id, presence: true
+
+    # Calculates unoccupied capacity
+    def calculate_unoccupied_capacity
+        (self.total_capacity - self.occupied_capacity)
+    end
 
     private
     # Checks if warehouse is empty
@@ -19,8 +24,20 @@ class Warehouse < ApplicationRecord
         end
     end
 
-    # Calculates unoccupied capacity
-    def calculate_unoccupied_capacity
-        (self.total_capacity - self.occupied_capacity)
+    # Checks utilization capacity againist total capacity
+    def check_utilization_capacity
+        if self.utilization_capacity >= self.total_capacity
+            self.errors.add(:not_empty, "Invalid utilization capacity")
+            throw :abort
+        end
     end
+
+    # Checks occupied capacity againist utilization capacity
+    def check_occupied_capacity
+        if self.occupied_capacity > self.utilization_capacity
+            self.errors.add(:not_empty, "Invalid occupation capacity")
+            thorw :abort
+        end
+    end
+
 end

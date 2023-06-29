@@ -5,6 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 logic.txt
+req.txt
 
 # Ignore bundler config.
 /.bundle

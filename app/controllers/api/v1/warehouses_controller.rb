@@ -60,7 +60,7 @@ module Api::V1
 
         private
         def warehouse_params
-            params.permit(:name, :address, :phone_number, :email, :manager_id, :total_capacity, :occupied_capacity)
+            params.permit(:name, :address, :phone_number, :email, :manager_id, :total_capacity, :occupied_capacity, :utilization_capacity)
         end
 
     end

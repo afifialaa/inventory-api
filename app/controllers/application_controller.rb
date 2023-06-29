@@ -24,6 +24,13 @@ class ApplicationController < ActionController::Base
 		end
     end
 
+    def get_warehouse
+        @warehouse = Warehouse.find_by_id(params[:id])
+        if @supplier == nil
+            return render(json: {error: "Warehouse not found"}, status: :not_found)
+        end
+    end
+
     def get_customer
         @customer = Customer.find_by_id(params[:id])
         if @customer == nil

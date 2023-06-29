@@ -64,6 +64,11 @@ Rails.application.routes.draw do
             # Order details routes
             get '/order/:id/details', to: 'orders#show_order_details'
             get '/order/:id/details/products', to: 'orders#show_order_products'
+
+            # Product_Warehouse routes
+            get '/test/products', to: 'products_warehouses#index'
+            post '/test/product', to: 'products_warehouses#create'
+
         end
     end
     
