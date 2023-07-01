@@ -45,4 +45,11 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def get_prod_ware
+        @prod_ware = ProductWarehouse.find_by(product_id: params[:product_id], warehouse_id: params[:warehouse_id])
+        if @prod_ware == nil
+            render(json: {error: "Record was not found"})
+        end
+    end
+
 end

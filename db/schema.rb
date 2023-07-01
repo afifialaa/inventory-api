@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_27_215745) do
+ActiveRecord::Schema.define(version: 2023_07_01_124045) do
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -55,11 +55,10 @@ ActiveRecord::Schema.define(version: 2023_06_27_215745) do
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
-  create_table "product_warehouses", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "product_warehouses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "warehouse_id", null: false
     t.integer "quantity"
-    t.index ["product_id", "warehouse_id"], name: "index_product_warehouses_on_product_id_and_warehouse_id", unique: true
     t.index ["product_id"], name: "index_product_warehouses_on_product_id"
     t.index ["warehouse_id"], name: "index_product_warehouses_on_warehouse_id"
   end

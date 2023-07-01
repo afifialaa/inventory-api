@@ -66,8 +66,10 @@ Rails.application.routes.draw do
             get '/order/:id/details/products', to: 'orders#show_order_products'
 
             # Product_Warehouse routes
-            get '/test/products', to: 'products_warehouses#index'
-            post '/test/product', to: 'products_warehouses#create'
+            get '/inventory/warehouse/:id/product/:id', to: 'products_warehouses#show'
+            post '/inventory/warehouse/product', to: 'products_warehouses#create'
+            delete '/inventory/warehouse/:warehouse_id/product/:product_id', to: 'products_warehouses#destroy'
+            put '/inventory/warehouse/:warehouse_id/product/:product_id', to: 'products_warehouses#update'
 
         end
     end

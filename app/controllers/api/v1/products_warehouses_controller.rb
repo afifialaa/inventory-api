@@ -2,6 +2,8 @@ class Api::V1::ProductsWarehousesController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    before_action :get_prod_ware, only: [:show, :destroy, :update]
+
     def index
         @prod_ware = ProductWarehouse.all
         render(json: {items: @prod_ware}, status: 200)
@@ -16,12 +18,24 @@ class Api::V1::ProductsWarehousesController < ApplicationController
     end
 
     def show
+        render(json: {prod: @prod_ware}, status: 200)
     end
 
     def update
+        if @prod_ware.update(prod_ware_params)
+            render(json: {message: "Record was updated"}, status: 201)
+        else
+            render(json: {error: "Failed to update record"}, status: 422)
+        end
     end
 
-    def delete
+    def destroy
+        if @prod_ware.destroy
+            render(json: {message: "Recored was deleted successfully"}, status: 200)
+        else
+            render(json: {error: "Failed to delete record"}, status: 422)
+        end
+
     end
 
     def move

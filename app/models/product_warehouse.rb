@@ -6,6 +6,5 @@ class ProductWarehouse < ApplicationRecord
     validates :warehouse_id, presence: true
     validates :quantity, presence: true
 
-    ## validates :product_id, uniqueness: {scope: :warehouse_id}, message: => ""
     validates :product_id, uniqueness: { scope: :warehouse_id, :message => "Recored already exists"}
 end
